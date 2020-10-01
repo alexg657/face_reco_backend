@@ -11,14 +11,14 @@ const handleProfile = require('./controllers/profile');
 var knex = require('knex')({
     client: 'pg',
     connection: {
-        host: 'ec2-3-210-255-177.compute-1.amazonaws.com',
-        user: 'byndcsinjlssnq',
-        password: '2ae870e95188a0f60796ae56e5c0b5348245f34edc98ee60a41b5eb73c186338',
-        database: 'dco58kksumcseo'
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
     }
 });
 
-  
+
 
 app.use(express.json());//middleware
 app.use(cors());
@@ -51,7 +51,7 @@ app.put('/clarifai', (req, res) => {
     handleImage.clarifai(req, res)
 })
 
- 
+
 app.listen(process.env.PORT, () => {
     console.log(`running on port ${process.env.PORT}`);
 });
