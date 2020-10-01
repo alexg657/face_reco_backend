@@ -11,10 +11,10 @@ const handleProfile = require('./controllers/profile');
 var knex = require('knex')({
     client: 'pg',
     connection: {
-        host: '127.0.0.1',
-        user: 'postgres',
-        password: '5555',
-        database: 'face_reco'
+        host: 'ec2-3-210-255-177.compute-1.amazonaws.com',
+        user: 'byndcsinjlssnq',
+        password: '2ae870e95188a0f60796ae56e5c0b5348245f34edc98ee60a41b5eb73c186338',
+        database: 'dco58kksumcseo'
     }
 });
 
