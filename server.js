@@ -51,8 +51,8 @@ app.put('/clarifai', (req, res) => {
     handleImage.clarifai(req, res)
 })
 
-const port=process.env.port;
-app.listen(port, () => {
-    console.log(`running on port ${port}`);
+ 
+app.listen(process.env.PORT, () => {
+    console.log(`running on port ${process.env.PORT}`);
 });
 
