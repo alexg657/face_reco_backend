@@ -7,6 +7,8 @@ const handleSignin = require('./controllers/signin');
 const handleImage = require('./controllers/image');
 const handleProfile = require('./controllers/profile');
 
+app.use(express.json());//middleware
+app.use(cors());
 
 var knex = require('knex')({
     client: 'pg',
@@ -20,8 +22,7 @@ var knex = require('knex')({
 
 
 
-app.use(express.json());//middleware
-app.use(cors());
+
 
 // app.get('/', (req, res) => {
 //     res.json(database.users)
