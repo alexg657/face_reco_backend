@@ -39,7 +39,7 @@ app.post('/register', (req, res) => {
 })
 
 
-app.get('/profile', (req, res) => {
+app.post('/profile', (req, res) => {
     handleProfile.handleProfile(req, res, knex,bcrypt)
 
 })
