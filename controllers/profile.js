@@ -1,7 +1,8 @@
-const handleProfile=(req,res,knex)=>{
+const handleProfile=(req,res,knex,bcrypt)=>{
 
-const { id } = req.params;
-    knex.select('*').from('users').where({ id })
+const { name,email,password } = req.body;
+
+    knex.select('*').from('users').where({ email })
         .then(user => {
             if (user.length) {
                 res.json(user[0])

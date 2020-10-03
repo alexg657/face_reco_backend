@@ -38,9 +38,9 @@ app.post('/register', (req, res) => {
     handleRegister.handleRegister(req, res, bcrypt, knex);
 })
 
-//optional
-app.get('/profile/:id', (req, res) => {
-    handleProfile.handleProfile(req, res, knex)
+
+app.get('/profile', (req, res) => {
+    handleProfile.handleProfile(req, res, knex,bcrypt)
 
 })
 
