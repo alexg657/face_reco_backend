@@ -4,9 +4,11 @@ const handleProfile = (req, res, knex, bcrypt) => {
 
     knex('users')
         .where({ email })
+        .returning('*')
         .update({
             name: 'archived'
         })
+        
         .then(user => {
             if (user.length) {
                 res.json(user[0])
