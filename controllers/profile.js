@@ -1,8 +1,12 @@
-const handleProfile=(req,res,knex,bcrypt)=>{
+const handleProfile = (req, res, knex, bcrypt) => {
 
-const { name,email,password } = req.body;
+    const { name, email, password } = req.body;
 
-    knex.select('*').from('users').where({ email })
+    knex('users')
+        .where({ email })
+        .update({
+            name: 'archived'
+        })
         .then(user => {
             if (user.length) {
                 res.json(user[0])
@@ -12,8 +16,11 @@ const { name,email,password } = req.body;
             }
 
         })
-        .catch(err => res.status(400).json('unable to get user'))
-    }
-    module.exports={
-        handleProfile
-    }
+        .catch(err => res.status(400).json('unable to update user'))
+
+
+
+}
+module.exports = {
+    handleProfile
+}
