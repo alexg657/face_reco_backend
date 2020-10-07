@@ -1,19 +1,50 @@
+
 const handleProfile = (req, res, knex, bcrypt) => {
 
     let { name, email, password, newemail, getUpdate, getDelete } = req.body;
+    let count = 0, finish = 0;//count filled inputs, finish promises
+
+    const final = (user) => {
+
+        if (count == 1) {
+            if (finish == 1) {
+                res.json(user)
+            }
+
+        }
+        else if (count == 2) {
+            if (finish == 2) {
+                res.json(user)
+            }
+        }
+        else if (count == 3) {
+            if (finish == 3) {
+                res.json(user)
+            }
+        }
+    }
+
+
     if (getUpdate) {
 
         if (name) {
-
+            count++;
             knex('users')
                 .where({ email })
                 .update({
                     name: name
                 })
+                .returning('*')
+                .then(user => {
+                    finish++;
+                    final(user[0])
 
+                })
                 .catch(() => res.status(400).json('unable to update name'))
+
         }
         if (password) {
+            count++;
             const hash = bcrypt.hashSync(password);
 
             knex('login')
@@ -24,23 +55,32 @@ const handleProfile = (req, res, knex, bcrypt) => {
                 .then(() =>
                     knex('users')
                         .where({ email })
+                        .then(user => {
+                            finish++;
+                            final(user[0])
+                        })
                 )
 
                 .catch(() => res.status(400).json('unable to update password'))
         }
         if (newemail) {
+            count++;
             knex.transaction(trx => {
                 trx('login')
                     .where({ email })
                     .update({
                         email: newemail
                     })
-                    .returning('email')
                     .then(() => {
                         trx('users')
                             .where({ email })
                             .update({
                                 email: newemail
+                            })
+                            .returning('*')
+                            .then(user => {
+                                finish++;
+                                final(user[0])
                             })
                             .then(trx.commit)
                             .catch(trx.rollback)
@@ -52,41 +92,31 @@ const handleProfile = (req, res, knex, bcrypt) => {
 
             }).catch(() => res.status(400).json('unable to update email'))
         }
-
-        knex('users')
-            .where({ email })
-            .then(user => {
-
-                if (user[0].id) {
-                    res.json(user[0])
-                }
-                else {
-                    res.status(404).json('res err')
-                }
-
-            })
-            .catch(err => res.status(400).json('err'))
+        if (!name && !password && !newemail) {
+            res.json('empty')
+        }
+        
     }
     else if (getDelete) {
 
-            knex.transaction(trx => {
-                trx('login')
-                    .where({ email })
-                    .del()
-                    .then(() => {
-                        trx('users')
-                            .where({ email })
-                            .del()
-                            .then(trx.commit)
-                            .catch(trx.rollback)
+        knex.transaction(trx => {
+            trx('login')
+                .where({ email })
+                .del()
+                .then(() => {
+                    trx('users')
+                        .where({ email })
+                        .del()
+                        .then(trx.commit)
+                        .catch(trx.rollback)
 
-                    }).then(() => {
-                       res.json('success')
-                        //trx success
-                    })
+                }).then(() => {
+                    res.json('success')
+                    //trx success
+                })
 
-            }).catch(() => res.status(400).json('unable to delete account'))
-       
+        }).catch(() => res.status(400).json('unable to delete account'))
+        
     }
 
 }
