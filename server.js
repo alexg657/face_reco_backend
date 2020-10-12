@@ -6,7 +6,7 @@ const handleRegister = require('./controllers/register');
 const handleSignin = require('./controllers/signin');
 const handleImage = require('./controllers/image');
 const handleProfile = require('./controllers/profile');
-
+const handleForgotPassword = require('./controllers/password');
 
 var knex = require('knex')({
     client: 'pg',
@@ -32,7 +32,13 @@ app.post('/signin', (req, res) => {
 
 })
 
+app.post('/forgotpassword', (req, res) => {
+    handleForgotPassword.handleForgotPassword(req, res, bcrypt, knex);
+})
 
+app.post('/renewpassword', (req, res) => {
+    handleForgotPassword.handleRenewPassword(req, res, bcrypt, knex);
+})
 
 app.post('/register', (req, res) => {
     handleRegister.handleRegister(req, res, bcrypt, knex);
