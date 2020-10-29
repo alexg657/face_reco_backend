@@ -25,7 +25,7 @@ const handleFilesUpload = (req, res, next) => {
         })
         .on('fileBegin', function (name, file) {
 
-            file.path = './profile_pic/' + email + path.extname(file.name);
+            file.path = './tmp/' + email + path.extname(file.name);
 
             //console.log('filebegin', file.path)
             filepath = file.path
@@ -60,7 +60,7 @@ const handleFilesUpload = (req, res, next) => {
             res.json(response)
         }
 
-        glob(`./profile_pic/${email}.*`, function (er, files) {
+        glob(`./tmp/${email}.*`, function (er, files) {
             if (files.length > 0) {
                 //console.log(files)
                 fs.unlinkSync(files[0])
