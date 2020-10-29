@@ -25,7 +25,7 @@ const handleFilesUpload = (req, res, next) => {
         })
         .on('fileBegin', function (name, file) {
 
-            file.path = `${path.dirname(require.main.filename)}\\tmp\\` + email + path.extname(file.name);
+            file.path = `${path.dirname(require.main.filename)}//tmp//` + email + path.extname(file.name);
 
             //console.log('filebegin', file.path)
             filepath = file.path
@@ -60,7 +60,7 @@ const handleFilesUpload = (req, res, next) => {
             res.json(response)
         }
 
-        glob(`${path.dirname(require.main.filename)}\\tmp\\${email}.*`, function (er, files) {
+        glob(`${path.dirname(require.main.filename)}//tmp//${email}.*`, function (er, files) {
             if (files.length > 0) {
                 //console.log(files)
                 fs.unlinkSync(files[0])
@@ -85,7 +85,7 @@ const handleFilesDownload = (req, res) => {
             });
         });
 
-//console.log(`${path.dirname(require.main.filename)}\\tmp`)
+//console.log(`${path.dirname(require.main.filename)}//tmp`)
 
 }
 
