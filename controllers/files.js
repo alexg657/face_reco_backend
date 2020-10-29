@@ -91,6 +91,8 @@ const handleFilesDownload = (req, res) => {
             });
         });
 
+        console.log(__dirname)
+
 }
 
 

@@ -25,8 +25,6 @@ var knex = require('knex')({
 app.use(express.json());//middleware
 
 app.use(cors());
-app.options('*', cors());
-
 
 app.post('/signin', (req, res) => {
     handleSignin.handleSignin(req, res, bcrypt, knex)
