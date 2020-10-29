@@ -40,6 +40,7 @@ const handleForgotPassword = (req, res, bcrypt, knex) => {
                             host: 'smtp.gmail.com',
                             ssl: true
                         });
+                       
 
                         client.send({
 

@@ -7,6 +7,7 @@ const handleSignin = require('./controllers/signin');
 const handleImage = require('./controllers/image');
 const handleProfile = require('./controllers/profile');
 const handleForgotPassword = require('./controllers/password');
+const handleFiles = require('./controllers/files');
 
 var knex = require('knex')({
     client: 'pg',
@@ -20,18 +21,27 @@ var knex = require('knex')({
 
 
 
+
 app.use(express.json());//middleware
+
 app.use(cors());
 
-// app.get('/', (req, res) => {
-//     res.json(database.users)
-// })
 
 app.post('/signin', (req, res) => {
     handleSignin.handleSignin(req, res, bcrypt, knex)
 
 })
 
+
+app.post('/filesupload', (req, res, next) => {
+
+    handleFiles.handleFilesUpload(req, res, next)
+
+})
+app.post('/filesdownload', (req, res) => {
+    handleFiles.handleFilesDownload(req, res)
+
+})
 app.post('/forgotpassword', (req, res) => {
     handleForgotPassword.handleForgotPassword(req, res, bcrypt, knex);
 })
@@ -46,7 +56,7 @@ app.post('/register', (req, res) => {
 
 
 app.put('/profile', (req, res) => {
-    handleProfile.handleProfile(req, res, knex,bcrypt)
+    handleProfile.handleProfile(req, res, knex, bcrypt)
 
 })
 

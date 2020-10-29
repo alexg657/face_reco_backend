@@ -1,9 +1,8 @@
 const Clarifai = require('clarifai');
-const { json } = require('express');
 
 const app = new Clarifai.App({
     apiKey: process.env.CLARIFAI_KEY
-    
+   
     
 });
 
