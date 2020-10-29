@@ -32,12 +32,12 @@ app.post('/signin', (req, res) => {
 })
 
 
-app.post('/filesupload', (req, res, next) => {
+app.post('/filesupload',cors(), (req, res, next) => {
 
     handleFiles.handleFilesUpload(req, res, next)
 
 })
-app.post('/filesdownload', (req, res) => {
+app.post('/filesdownload',cors(), (req, res) => {
     handleFiles.handleFilesDownload(req, res)
 
 })
