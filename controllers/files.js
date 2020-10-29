@@ -5,8 +5,8 @@ const glob = require("glob")
 const cloudinary = require('cloudinary').v2;
 cloudinary.config({
     cloud_name: 'face-reco',
-    api_key: process.env.cloudinary_key,
-    api_secret: process.env.cloudinary_secret
+    api_key: process.env.CLOUDINARY_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET
 });
 
 
@@ -65,20 +65,14 @@ const handleFilesUpload = (req, res, next) => {
                 //console.log(files)
                 fs.unlinkSync(files[0])
             }
-
         })
-
-
     }
 }
 
 const handleFilesDownload = (req, res) => {
 
-console.log(__dirname)
     cloudinary.api.resource((req.body.email).replace('@', '_'),
         function (error, result) {
-
-
 
             var request = require('request').defaults({ encoding: null });
             request.get(result.url, function (error, response, body) {
@@ -90,8 +84,6 @@ console.log(__dirname)
                 }
             });
         });
-
-        
 
 }
 
