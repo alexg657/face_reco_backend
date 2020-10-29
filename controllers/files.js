@@ -5,8 +5,8 @@ const glob = require("glob")
 const cloudinary = require('cloudinary').v2;
 cloudinary.config({
     cloud_name: 'face-reco',
-    api_key: process.env.CLOUDINARY_KEY,
-    api_secret: process.env.CLOUDINARY_SECRET
+    api_key: '269952856826464',
+    api_secret: 'QJXAHU9-7LHIFsrHn_fq6qi3Ni8'
 });
 
 
