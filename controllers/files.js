@@ -74,7 +74,7 @@ const handleFilesUpload = (req, res, next) => {
 
 const handleFilesDownload = (req, res) => {
 
-
+console.log(__dirname)
     cloudinary.api.resource((req.body.email).replace('@', '_'),
         function (error, result) {
 
@@ -91,7 +91,7 @@ const handleFilesDownload = (req, res) => {
             });
         });
 
-        console.log(__dirname)
+        
 
 }
 
