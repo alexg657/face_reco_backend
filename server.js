@@ -19,10 +19,21 @@ var knex = require('knex')({
     }
 });
 
+// var knex = require('knex')({
+//     client: 'pg',
+//     connection: {
+//       host : '127.0.0.1',
+//       user : 'postgres',
+//       password : '5555',
+//       database : 'face_reco'
+//     }
+//   });
 
 
+// app.use(express.json());//middleware
 
-app.use(express.json());//middleware
+app.use(express.json({limit: '50mb'}));
+// app.use(express.urlencoded({limit: '50mb'}));
 
 app.use(cors());
 
