@@ -40,12 +40,7 @@ const handleForgotPassword = (req, res, bcrypt, knex) => {
                             host: 'smtp.gmail.com',
                             ssl: true
                         });
-                        // const client = new SMTPClient({
-                        //     user: 'face.reco.backend',
-                        //     password: 'face`1`1reco',
-                        //     host: 'smtp.gmail.com',
-                        //     ssl: true
-                        // });
+                        
 
                         client.send({
 

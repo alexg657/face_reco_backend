@@ -1,15 +1,9 @@
 const Clarifai = require('clarifai');
 
 const app = new Clarifai.App({
-    apiKey: process.env.CLARIFAI_KEY
-   
-    
+    apiKey: process.env.CLARIFAI_KEY   
 });
-// const app = new Clarifai.App({
-//     apiKey: 'ed1e6de39f3a46a4b9d131665b07800a'
-//     //process.env.CLARIFAI_KEY
-//     //
-// });
+
 const handleImage = (req, res, knex) => {
     const { id } = req.body;
     knex('users')

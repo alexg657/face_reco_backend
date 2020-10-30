@@ -19,21 +19,7 @@ var knex = require('knex')({
     }
 });
 
-// var knex = require('knex')({
-//     client: 'pg',
-//     connection: {
-//       host : '127.0.0.1',
-//       user : 'postgres',
-//       password : '5555',
-//       database : 'face_reco'
-//     }
-//   });
-
-
-// app.use(express.json());//middleware
-
 app.use(express.json({limit: '50mb'}));
-// app.use(express.urlencoded({limit: '50mb'}));
 
 app.use(cors());
 
@@ -43,9 +29,9 @@ app.post('/signin', (req, res) => {
 })
 
 
-app.post('/filesupload', (req, res, next) => {
+app.post('/filesupload', (req, res) => {
 
-    handleFiles.handleFilesUpload(req, res, next)
+    handleFiles.handleFilesUpload(req, res)
 
 })
 app.post('/filesdownload', (req, res) => {
